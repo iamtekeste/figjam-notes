@@ -11,6 +11,7 @@ type TipTapProps = {
   canEdit: boolean
 }
 const Tiptap = ({handleUpdate, content, canEdit}: TipTapProps) => {
+  const innerEditorClass = canEdit ? "inner-editor can-edit" : "inner-editor"
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -21,7 +22,7 @@ const Tiptap = ({handleUpdate, content, canEdit}: TipTapProps) => {
     editorProps: {
       editable: () => canEdit,
       attributes: {
-        class: "inner-editor",
+        class: innerEditorClass,
       },
     },
     onUpdate({ editor }) {

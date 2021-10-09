@@ -10,13 +10,16 @@
   font-family: Inter, sans-serif;
 }
 .inner-editor {
-  height: 260px;
+  height: 285px;
   padding: 1rem;
   padding-top: 0;
   margin: 0.5rem;
   overflow: scroll;
   border: 1px solid transparent;
   outline: 1px solid transparent;
+}
+.inner-editor.can-edit {
+  height: 270px;
 }
 .inner-editor:focus {
   border: 1px solid #18a0fb;

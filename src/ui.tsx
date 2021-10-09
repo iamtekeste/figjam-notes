@@ -87,15 +87,21 @@ function Plugin(props: { text: string }) {
         content={activeNote.content}
         canEdit={canEdit}
       />
-      <div class="action-bar">
-        <span class="notice">Notes get saved automatically.</span>
-        <Button class="save-btn" onClick={handleDone}>
-          Done
-        </Button>
-        <Button secondary destructive onClick={handleDelete}>
-          Delete
-        </Button>
-      </div>
+      {canEdit ? (
+        <div class="action-bar">
+          <span class="notice">Notes get saved automatically.</span>
+          <Button class="save-btn" onClick={handleDone}>
+            Done
+          </Button>
+          <Button secondary destructive onClick={handleDelete}>
+            Delete
+          </Button>
+        </div>
+      ) : (
+        <div class="action-bar">
+          <span class="notice">You can only edit notes you have created.</span>
+        </div>
+      )}
     </Fragment>
   );
 }
