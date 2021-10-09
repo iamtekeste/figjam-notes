@@ -1,0 +1,103 @@
+.element {
+  font-size: 1rem;
+}
+.ProseMirror > * + * {
+  margin-top: 0.5rem;
+  font-family: Inter;
+  outline: none;
+}
+.ProseMirror * {
+  font-family: Inter, sans-serif;
+}
+.inner-editor {
+  height: 260px;
+  padding: 1rem;
+  padding-top: 0;
+  margin: 0.5rem;
+  overflow: scroll;
+  border: 1px solid transparent;
+  outline: 1px solid transparent;
+}
+.inner-editor:focus {
+  border: 1px solid #18a0fb;
+  outline: 1px solid #18a0fb;
+  outline-offset: -2px;
+}
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #ced4da;
+  pointer-events: none;
+  height: 0;
+}
+.ProseMirror ul,
+.ProseMirror ol {
+  padding: 0 1rem;
+}
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+  line-height: 1.1;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+.ProseMirror code {
+  background-color: rgba(97, 97, 97, 0.1);
+  color: #616161;
+}
+.ProseMirror pre {
+  background: #0d0d0d;
+  color: #fff;
+  font-family: "JetBrainsMono", monospace;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
+.ProseMirror pre code {
+  color: inherit;
+  padding: 0;
+  background: none;
+  font-size: 0.8rem;
+}
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+}
+.ProseMirror hr {
+  margin: 1rem 0;
+}
+.ProseMirror blockquote {
+  padding-left: 1rem;
+  border-left: 2px solid rgba(13, 13, 13, 0.1);
+}
+.info-bar {
+  font-size: 14px;
+  text-align: center;
+  padding-top: 8px;
+  color: #999;
+  bottom: 0;
+}
+.action-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  background: #fff;
+  width: 100%;
+  padding: 8px;
+}
+button {
+  cursor: pointer;
+}
+.save-btn {
+  margin-right: 16px;
+}
+.notice {
+  margin-right: auto;
+  color: #999;
+}
+@import url("https://rsms.me/inter/inter.css");
