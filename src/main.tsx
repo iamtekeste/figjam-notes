@@ -98,7 +98,7 @@ function NotePad() {
         <SVG src={newNoteIcon} onClick={addNewNote} />
       </AutoLayout>
       <NotesList
-        notes={notes.values()}
+        notes={notes.values().sort((a, b) => b.createdAt - a.createdAt)}
         addNewNote={addNewNote}
         showAllNotes={showAllNotes}
         toggleShowAllNotes={toggleShowAllNotes}
