@@ -4,7 +4,7 @@ import { Content } from "@tiptap/core";
 import { nanoid } from "nanoid";
 import { Fragment, h } from "preact";
 import { useState } from "preact/hooks";
-import { Note } from "./main";
+import { Note } from ".";
 import Tiptap from "./TipTap";
 
 function Plugin(props: { text: string }) {
