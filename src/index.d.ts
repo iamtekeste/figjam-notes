@@ -22,6 +22,7 @@ type NotesListProp = {
 type NoteItemProp = {
   noteId: string;
   note: Note;
+  key: string;
 };
 type EmptyStateProp = {
   addNewNote: () => void | Promise<any>;

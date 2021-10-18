@@ -19,7 +19,7 @@ const NotesList = ({
   const notesTobeRendered = showAllNotes ? allNotes : allNotes.slice(0, 5);
   const notesList = notesTobeRendered.map((note) => {
     return note.previewText ? (
-      <NoteItem noteId={note.noteId} note={note} />
+      <NoteItem noteId={note.noteId} note={note} key={note.noteId}/>
     ) : (
       <Frame width={0.01} height={0.01} hidden></Frame>
     );
