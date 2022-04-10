@@ -1,10 +1,19 @@
 /** @jsx figma.widget.h */
+import fuzzysort from "fuzzysort";
 
 import { showUI, emit, on } from "@create-figma-plugin/utilities";
 import { Note } from ".";
 const { widget } = figma;
-const { AutoLayout, Text, useSyncedMap, SVG, useWidgetId, useSyncedState } =
-  widget;
+const {
+  AutoLayout,
+  Text,
+  useSyncedMap,
+  SVG,
+  useWidgetId,
+  useSyncedState,
+  Input,
+  useStickable,
+} = widget;
 import NotesList from "./notes-list";
 export default function () {
   widget.register(NotePad);
@@ -18,12 +27,14 @@ const newNoteIcon = `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"
 
 function NotePad() {
   const thisWidgetId = useWidgetId();
+  const thisWidget = figma.getNodeById(thisWidgetId) as WidgetNode;
 
   const notes = useSyncedMap<Note>("all-notes");
   const [showAllNotes, setShowAllNotes] = useSyncedState(
     "show-all-notes",
     false
   );
+  const [searchTerm, setSearchTerm] = useSyncedState("searchTerm", "");
 
   on("NOTE-UPDATED", (note: Note) => {
     const { noteId } = note;
@@ -73,6 +84,14 @@ function NotePad() {
     setShowAllNotes(!showAllNotes);
   };
 
+  const filteredNotes = searchTerm
+    ? fuzzysort
+        .go(searchTerm, notes.values(), {
+          key: "previewText",
+        })
+        .map(({ obj: note }) => note)
+    : notes.values();
+  useStickable();
   return (
     <AutoLayout
       direction="vertical"
@@ -97,8 +116,24 @@ function NotePad() {
         </Text>
         <SVG src={newNoteIcon} onClick={addNewNote} />
       </AutoLayout>
+      <Input
+        value={searchTerm}
+        placeholder={"Search notes"}
+        onTextEditEnd={(e: { characters: string }) => {
+          setSearchTerm(e.characters);
+        }}
+        fontSize={16}
+        fill={"#333"}
+        placeholderProps={{ opacity: 0.5 }}
+        width="fill-parent"
+        inputFrameProps={{
+          stroke: "#E5E5E5",
+          padding: { top: 8, bottom: 8, right: 16, left: 16 },
+          cornerRadius: 0,
+        }}
+      />
       <NotesList
-        notes={notes.values().sort((a, b) => b.createdAt - a.createdAt)}
+        notes={filteredNotes.sort((a, b) => b.createdAt - a.createdAt)}
         addNewNote={addNewNote}
         showAllNotes={showAllNotes}
         toggleShowAllNotes={toggleShowAllNotes}

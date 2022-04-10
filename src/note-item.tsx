@@ -27,10 +27,6 @@ const NoteItem = ({ note }: NoteItemProp) => {
     });
   };
 
-  const selectedNodeId = note?.selectedNodeId;
-  const selectedNode = figma.getNodeById(selectedNodeId) as GeometryMixin;
-  //@ts-ignore
-  const fill = selectedNode?.fills?.[0];
   return (
     <AutoLayout
       direction="horizontal"
@@ -106,20 +102,6 @@ const NoteItem = ({ note }: NoteItemProp) => {
             {new Date(note.createdAt).toLocaleDateString()} •{" "}
             {note.creator.name}
           </Text>
-          {/* {selectedNodeId ? (
-              <Rectangle
-                width={12}
-                height={12}
-                cornerRadius={6}
-                onClick={() =>
-                  figma.viewport.scrollAndZoomIntoView([selectedNode as BaseNode])
-                }
-                fill={{
-                  type: "solid",
-                  color: { ...fill.color, a: fill.opacity },
-                }}
-              ></Rectangle>
-            ) : null} */}
         </AutoLayout>
       </AutoLayout>
     </AutoLayout>
